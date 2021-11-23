@@ -21,7 +21,7 @@
 
     "storage.class": "io.confluent.connect.s3.storage.S3Storage",
     "format.class": "io.confluent.connect.s3.format.parquet.ParquetFormat",
-    "schema.compatibility": "NONE",
+    "schema.compatibility":"NONE",
     "partitioner.class": "io.confluent.connect.storage.partitioner.TimeBasedPartitioner",
     "timestamp.extractor":"Record",
     "timestamp.field" : "insertDate",
