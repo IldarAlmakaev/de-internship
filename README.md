@@ -29,6 +29,22 @@ docker-compose ps
 curl -XGET "http://localhost:8083/connectors?expand=status" | jq
 ```
 
+## ksqlDB
+* Once you deploy services, connect to ksqldb-cli
+```shell
+docker-compose exec ksqldb ksql http://ksqldb:8080
+```
+* Make sure that you established connection with ksqlDB server and see the following **Server Status: RUNNING**
+```text
+CLI v0.22.0, Server v0.22.0 located at http://ksqldb:8088
+Server Status: RUNNING
+```
+* By default, the ksqlDB is configured to consume messages from the latest offset. So, you need to run the following command to 
+get messages from the beginning
+```shell
+SET 'auto.offset.reset'='earliest';
+```
+
 ## Stopping 
 * To stop services use `down` command
 ```shell
