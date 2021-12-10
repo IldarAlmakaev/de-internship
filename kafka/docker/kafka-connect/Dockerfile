@@ -8,4 +8,5 @@ RUN set -ex \
         -O /tmp/debezium-connector-mysql-${DEBEZIUM_VERSION}-plugin.tar.gz \
     && tar xzvf /tmp/debezium-connector-mysql-${DEBEZIUM_VERSION}-plugin.tar.gz -C /usr/share/java/
 
+RUN echo "Installing MongoDB sink connector..." && confluent-hub install --no-prompt hpgrahsl/kafka-connect-mongodb:1.4.0
 RUN echo "Installing S3 sink connector..." && confluent-hub install --no-prompt confluentinc/kafka-connect-s3:5.5.3

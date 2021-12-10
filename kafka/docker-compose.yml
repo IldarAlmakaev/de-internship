@@ -135,8 +135,33 @@ services:
       /usr/bin/mc config host add myminio http://minio:9000 access_key secret_key;
       /usr/bin/mc mb myminio/datalake;
       /usr/bin/mc policy download myminio/datalake;
-      exit 0;
-      "
+      exit 0;"
+
+  mongodb:
+    image: "mongo:4.0"
+    hostname: mongodb
+    container_name: mongodb
+    expose:
+      - "27017"
+    ports:
+      - "27017:27017"
+    command: --bind_ip_all --smallfiles
+    volumes:
+      - ./mongodb-data:/data/db
+
+  mongoclient:
+    image: mongoclient/mongoclient:2.2.0
+    container_name: mongoclient
+    hostname: mongoclient
+    depends_on:
+      - mongodb
+    ports:
+      - 3000:3000
+    environment:
+      MONGO_URL: "mongodb://mongodb:27017"
+      PORT: 3000
+    expose:
+      - "3000"
 
   ksqldb:
     image: confluentinc/ksqldb-server:0.22.0

@@ -1,0 +1,17 @@
+{
+  "name" :"mongodb-sink-logging",
+  "config":
+  {
+    "connector.class": "at.grahsl.kafka.connect.mongodb.MongoDbSinkConnector",
+    "mongodb.connection.uri": "mongodb://mongodb/logging_audit?retryWrites=true",
+    "mongodb.collection": "MyCollection",
+    "topics": "logging.audit",
+    "tasks.max": "1",
+    "database": "logging_audit",
+    "key.converter": "io.confluent.connect.avro.AvroConverter",
+    "key.converter.schema.registry.url": "${file:/config.properties:schema-registry}",
+    "value.converter":"io.confluent.connect.avro.AvroConverter",
+    "value.converter.schema.registry.url": "${file:/config.properties:schema-registry}",
+    "value.converter.enhanced.avro.schema.support":"true"
+  }
+}
