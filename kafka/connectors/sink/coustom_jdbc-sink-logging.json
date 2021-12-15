@@ -1,0 +1,25 @@
+{
+  "name" :"s3-sink-logging",
+  "config":
+  {
+	"connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+	"transforms.changeTopicName.regex": "(.*).audit$",
+	"connection.password": "${file:/config.properties:postgres-password}",
+	"flush.size": "1",
+	"topics": "logging.audit",
+	"path":"sink_data",
+	"tasks.max": "1",
+	"transforms": "changeTopicName",
+	"transforms.changeTopicName.type": "org.apache.kafka.connect.transforms.RegexRouter",
+	"value.converter.enhanced.avro.schema.support": "true",
+	"value.converter.schema.registry.url": "${file:/config.properties:schema-registry}",
+	"connection.user": "${file:/config.properties:postgres-user}",
+	"name": "jdbc-sinc-logging",
+	"auto.create": "true",
+	"connection.url": "jdbc:postgresql://postgres:5432/logging",
+	"value.converter": "io.confluent.connect.avro.AvroConverter",
+	"key.converter": "io.confluent.connect.avro.AvroConverter",
+	"key.converter.schema.registry.url": "${file:/config.properties:schema-registry}",
+	"transforms.changeTopicName.replacement": "$1"
+  }
+}
