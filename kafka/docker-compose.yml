@@ -64,6 +64,7 @@ services:
       - "8083:8083"
     volumes:
       - ./connectors/config.properties:/config.properties
+      - ./sink_data:/sink_data
     environment:
       AWS_ACCESS_KEY_ID: ${MINIO_ACCESS_KEY}
       AWS_SECRET_ACCESS_KEY: ${MINIO_SECRET_KEY}
